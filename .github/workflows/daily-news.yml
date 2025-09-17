@@ -35,4 +35,4 @@ jobs:
           KWORK_TO_EMAIL: ${{ secrets.KWORK_TO_EMAIL }}
           KWORK_CONVERSATION_ID: ${{ secrets.KWORK_CONVERSATION_ID }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: node dist/index.js
+        run: node dist/src/index.js
