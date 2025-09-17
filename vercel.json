@@ -7,29 +7,12 @@
       "config": {
         "maxDuration": 30
       }
-    },
-    {
-      "src": "api/cron.ts",
-      "use": "@vercel/node",
-      "config": {
-        "maxDuration": 30
-      }
     }
   ],
   "routes": [
     {
-      "src": "/cron",
-      "dest": "api/cron.ts"
-    },
-    {
       "src": "/(.*)",
       "dest": "api/index.ts"
-    }
-  ],
-  "crons": [
-    {
-      "path": "/cron",
-      "schedule": "0 21 * * *"
     }
   ]
 }
