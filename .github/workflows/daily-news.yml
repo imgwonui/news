@@ -20,8 +20,14 @@ jobs:
           node-version: '20'
           cache: 'npm'
           
+      - name: Clear npm cache
+        run: npm cache clean --force
+          
       - name: Install dependencies
         run: npm ci
+        
+      - name: Build TypeScript
+        run: npx tsc
         
       - name: Run news collection
         env:
@@ -29,4 +35,4 @@ jobs:
           KWORK_TO_EMAIL: ${{ secrets.KWORK_TO_EMAIL }}
           KWORK_CONVERSATION_ID: ${{ secrets.KWORK_CONVERSATION_ID }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: npm run dev
+        run: node dist/index.js
