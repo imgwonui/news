@@ -1,12 +1,12 @@
 import 'dotenv/config';
 import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc.js';
-import timezone from 'dayjs/plugin/timezone.js';
-import { scrapeArticles } from './scrape.js';
-import { filterArticles } from './filter.js';
-import { summarizeArticles } from './summarize.js';
-import { sendToKakaoWork } from './send.js';
-import { logger, buildErrorReport } from './utils/logger.js';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+import { scrapeArticles } from './scrape';
+import { filterArticles } from './filter';
+import { summarizeArticles } from './summarize';
+import { sendToKakaoWork } from './send';
+import { logger, buildErrorReport } from './utils/logger';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);

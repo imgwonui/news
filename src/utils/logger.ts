@@ -39,6 +39,28 @@ export const logger = {
 };
 
 export const buildErrorReport = (context: string, error: unknown): string => {
-  const payload = typeof error === 'object' && error !== null ? JSON.stringify(error, null, 2) : String(error);
-  return `실패 지점: ${context}\n타임스탬프: ${dayjs().format('YYYY-MM-DD HH:mm:ss')}\n에러: ${payload}`;
+  let errorMessage = '알 수 없는 오류';
+  
+  if (error instanceof Error) {
+    errorMessage = `${error.name}: ${error.message}`;
+    if (error.stack) {
+      errorMessage += `\n스택 트레이스:\n${error.stack}`;
+    }
+  } else if (typeof error === 'string') {
+    errorMessage = error;
+  } else if (typeof error === 'object' && error !== null) {
+    // 객체인 경우 더 자세한 정보 추출
+    const errorObj = error as Record<string, unknown>;
+    if (errorObj.message) {
+      errorMessage = String(errorObj.message);
+    } else if (errorObj.error) {
+      errorMessage = String(errorObj.error);
+    } else {
+      errorMessage = JSON.stringify(error, null, 2);
+    }
+  } else {
+    errorMessage = String(error);
+  }
+  
+  return `실패 지점: ${context}\n타임스탬프: ${dayjs().format('YYYY-MM-DD HH:mm:ss')}\n에러: ${errorMessage}`;
 };
